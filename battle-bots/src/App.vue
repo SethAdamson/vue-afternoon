@@ -1,32 +1,62 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <header>
+      <button @click="changeTrue">Create</button>
+      <h1>Battle-Bots</h1>
+      <button @click="changeFalse">Collection</button>
+    </header>
+    <section v-if="viewToggle">
+      <create :addBot='addBot'/>
+    </section>
+    <section v-else>
+      <collection :bots='bots'/>
+    </section>
   </div>
 </template>
 
 <script>
+import Create from './components/Create';
+import Collection from'./components/Collection';
 export default {
-  name: 'app',
+  name: 'Battle-Bots',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      viewToggle: true,
+      bots: [
+        {
+          botName: 'Frank',
+          attack: 30,
+          health: 20,
+        },
+        {
+          botName: 'Harry',
+          attack: 40,
+          health: 10,
+        },
+        {
+          botName: 'Pearl',
+          attack: 10,
+          health: 40,
+        },
+      ]
     }
-  }
+  },
+  methods: {
+    changeTrue(){
+      this.viewToggle = true;
+    },
+    changeFalse(){
+      this.viewToggle = false;
+    },
+    addBot(name, atk, hp){
+      this.bots.push({botName:name, attack:atk, health:hp});
+      this.changeFalse();
+    }
+  },
+  components: {
+    Create: Create,
+    Collection: Collection,
+  },
 }
 </script>
 
@@ -38,6 +68,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+header {
+  display: flex;
+  justify-content: space-around
 }
 
 h1, h2 {
