@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <header>
-      <button @click="changeTrue">Create</button>
+      <button @click="changeTrue" class="head-btn">Create</button>
       <h1>Battle-Bots</h1>
-      <button @click="changeFalse">Collection</button>
+      <button @click="changeFalse" class="head-btn">Collection</button>
     </header>
     <section v-if="viewToggle">
       <create :addBot='addBot'/>
@@ -60,23 +60,39 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="css" >
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Orbitron', sans-serif;
+  background: #5CDB95;
 }
 
 header {
   display: flex;
-  justify-content: space-around
+  justify-content: space-around;
+  align-items: center;
+  height: 80px;
+  background: #05386B;
+  color: white;
+}
+
+.head-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
 }
 
 h1, h2 {
   font-weight: normal;
+  font-size: 30px;
 }
 
 ul {
@@ -91,5 +107,13 @@ li {
 
 a {
   color: #42b983;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 </style>
